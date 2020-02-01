@@ -3,6 +3,7 @@ import SearchBox from  './components/SearchBox'
 import Restaurant from './components/Restaurant'
 
 
+
 class App extends Component {
   constructor() {
     super();
@@ -70,7 +71,7 @@ class App extends Component {
         name={restaurant.restaurant.name}
         cuisines={restaurant.restaurant.cuisines}
         cost={(restaurant.restaurant.average_cost_for_two)/2}
-        
+        img={restaurant.restaurant.thumb}
       />
     );
   
@@ -84,8 +85,13 @@ class App extends Component {
          data={this.state}
          />
           <h3> Restaurants List here  </h3>
-        {/*<Restaurant list={this.state.restaurants}/>*/}
-         {restaurantList}
+        <table className='table-responsive'>
+          <tbody>
+          <tr><td> {restaurantList}</td></tr>
+          </tbody>
+        </table>
+        
+        {/*restaurantList*/}
          {console.log(this.state.restaurants)}
        
       </div>

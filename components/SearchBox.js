@@ -11,25 +11,32 @@ class SearchBox extends Component{
   render(props){
     return(
       <div> 
-        <form onSubmit={this.props.onSubmit}>
-         
-         <input 
-          type="text" 
-          name="city" 
-          classsName="form-control"
-          placeholder="Your City"
-          onChange={this.props.onChangeHandler}
-          value={this.props.data.city}
-         />
-        <input 
-          type="text" 
-          name="cuisine"
-          classsName="form-control"
-          placeholder="Your Cuisine"
-          onChange={this.props.onChangeHandler}
-          value={this.props.data.cuisine}
-         /> 
-         <button classsName='btnbtn-primary' >{this.props.operation}</button>
+         <form onSubmit={this.props.onSubmit}>
+           <div className='row'>
+             <div className='col-md-5'>
+               <input 
+                type="text" 
+                name="city" 
+                className="form-control"
+                placeholder="Your City"
+                onChange={this.props.onChangeHandler}
+                value={this.props.data.city}
+                />
+              </div>
+         <div className='col-md-5'>
+           <input 
+             type="text" 
+             name="cuisine"
+             className="form-control"
+             placeholder="Your Cuisine"
+             onChange={this.props.onChangeHandler}
+             value={this.props.data.cuisine}
+            /> 
+        </div>
+         <div className='col-md-2'>
+          <button className="btn btn-primary" >{this.props.operation}  </button>
+         </div>
+      </div>
      </form>
 
       </div>
