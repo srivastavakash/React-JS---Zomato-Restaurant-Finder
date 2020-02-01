@@ -8,7 +8,6 @@ class App extends Component {
     super();
     this.state = {
       city:'',
-      cuisine:'',
       restaurants:[],
       cuisine:'',
       operation :'Search',
@@ -34,7 +33,7 @@ class App extends Component {
   const axios = require('axios');
   axios({
     method: 'GET',
-    url: 'https://developers.zomato.com/api/v2.1/search?entity_type=city&q='+this.state.city+'&start=0&count=10&lat=18.594847&lon=73.735742&radius=500&cuisines='+this.state.cuisine+'&sort=real_distance&order=asc',
+    url: 'https://developers.zomato.com/api/v2.1/search?entity_type=city&q='+this.state.city+'&start=0&count=10&lat=18.594847&lon=73.735742&radius=5000&cuisines='+this.state.cuisine+'&sort=real_distance&order=asc',
     headers: {
       'user-key': "33419799ae4c439ddd65b4c6bfbca9cb", 
       "content-type": "application/json"
@@ -44,7 +43,7 @@ class App extends Component {
       console.log(response.data.restaurants[0].restaurant.name);
       //console.log(response.data.restaurants);
       this.setState({
-        restaurants : response.data
+        restaurants : response.data.restaurants
       })
     })
     .catch(error => {
@@ -61,27 +60,33 @@ class App extends Component {
 
   render() {
 
-   /* var list= [...this.state.restaurants]
+    var list= [...this.state.restaurants]
 
      const restaurantList = list.map(
       restaurant=>
-      <Restaurant key={restaurants.restaurant.id}
-        id={restaurants.restaurant.id}
+      <Restaurant
+        key={restaurant.restaurant.id}
+        //id={restaurant.restaurant.id}
+        name={restaurant.restaurant.name}
+        cuisines={restaurant.restaurant.cuisines}
+        cost={(restaurant.restaurant.average_cost_for_two)/2}
+        
       />
     );
-  */
+  
+
     return (
-      <div>
-       
+      <div className='container'>       
        <SearchBox 
          operation={this.state.operation}
          onSubmit={this.getResturants}
          onChangeHandler={this.onChangeHandler}
          data={this.state}
          />
-        
-         {/*restaurantList*/}
-         {/*console.log(this.state.restaurants)*/}
+          <h3> Restaurants List here  </h3>
+        {/*<Restaurant list={this.state.restaurants}/>*/}
+         {restaurantList}
+         {console.log(this.state.restaurants)}
        
       </div>
     )

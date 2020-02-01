@@ -12,9 +12,11 @@ class SearchBox extends Component{
     return(
       <div> 
         <form onSubmit={this.props.onSubmit}>
+         
          <input 
           type="text" 
           name="city" 
+          classsName="form-control"
           placeholder="Your City"
           onChange={this.props.onChangeHandler}
           value={this.props.data.city}
@@ -22,11 +24,12 @@ class SearchBox extends Component{
         <input 
           type="text" 
           name="cuisine"
+          classsName="form-control"
           placeholder="Your Cuisine"
           onChange={this.props.onChangeHandler}
           value={this.props.data.cuisine}
          /> 
-         <button >{this.props.operation}</button>
+         <button classsName='btnbtn-primary' >{this.props.operation}</button>
      </form>
 
       </div>
