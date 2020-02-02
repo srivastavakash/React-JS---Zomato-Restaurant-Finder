@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import SearchBox from  './components/SearchBox'
 import Restaurant from './components/Restaurant'
+import Header from './components/Header'
 
 
 
@@ -72,29 +73,35 @@ class App extends Component {
         cuisines={restaurant.restaurant.cuisines}
         cost={(restaurant.restaurant.average_cost_for_two)/2}
         img={restaurant.restaurant.thumb}
+        rating={restaurant.restaurant.user_rating}
+        area={restaurant.restaurant.location.locality}
       />
     );
   
 
     return (
-      <div className='container'>       
+      <React.Fragment>
+      <Header
+         operation={this.state.operation}
+         onSubmit={this.getResturants}
+         onChangeHandler={this.onChangeHandler}
+         data={this.state}
+       />
+      <div className='container'>            
        <SearchBox 
          operation={this.state.operation}
          onSubmit={this.getResturants}
          onChangeHandler={this.onChangeHandler}
          data={this.state}
          />
-          <h3> Restaurants List here  </h3>
-        <table className='table-responsive'>
-          <tbody>
-          <tr><td> {restaurantList}</td></tr>
-          </tbody>
-        </table>
-        
-        {/*restaurantList*/}
+          <h3> Restaurants List here  </h3>        
+
+          {restaurantList}
+
          {console.log(this.state.restaurants)}
        
       </div>
+      </React.Fragment>
     )
   }
 }

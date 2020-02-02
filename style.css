@@ -2,6 +2,31 @@ h1, p {
   font-family: Lato;
 }
 .img-thumbnail{
- width:10%;
- height: 10%;
+ width:70%;
+ height: 70%;
+}
+
+header{
+  background-color: #e60000;
+  height:7em;
+}
+.head{
+  color:antiquewhite;
+  display: inline;
+}
+.hh{
+  color: #e60000
+}
+.logo{
+  height:6em;
+  width:6em;  
+}
+.rating{
+ float: right
+}
+.name{
+  float: left
+}
+.restaurant-card{
+  margin-bottom: 5px;
 }
