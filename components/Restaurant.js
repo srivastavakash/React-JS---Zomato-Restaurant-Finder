@@ -1,34 +1,61 @@
-import React, { Component } from 'react';
+import React from "react";
 
-class Restaurant extends Component{
-  
-  render(props){
-    this.id=1
-    console.log('prop : ',this.props)
+function Restaurant(props) {
+  return (
+    <div className="card restaurant-card">
+      <div className="row">
+        <div className="col-md-3 col-sm-2">
+          <img
+            src={
+              props.img
+                ? props.img
+                : "https://coomaindian.com/wp-content/uploads/2015/02/indian.jpg"
+            }
+            alt={props.name}
+            className="img-thumbnail rounded"
+          />
+        </div>
+        <div className="col-md-9 col-sm-10">
+          <p className="res-name text-center">{props.name}</p>
+          <div>
+            <p
+              className="rating font-weight-bold"
+              style={{
+                backgroundColor: "#" + props.rating.rating_color,
+                color: "#fff"
+              }}
+            >
+              &nbsp; &nbsp; {props.rating.aggregate_rating} &nbsp; &nbsp;
+            </p>
+            <p className="text-warning">
+              {props.ratings + " "} reviews &nbsp;{props.votes}
+              &nbsp; votes
+            </p>
+          </div>
+          <p className="text-secondary">{props.locality}</p>
 
-    const ratingStyle={
-      backgroundColor:'#'+this.props.rating.rating_color,
-      color:'#fff',
-      'borderRadius':'5'
-      };
-
-    return(
-      <div className='card restaurant-card'>
-       <div className='row'>
-       <div className='col-md-3 col-sm-4'>
-       <img src={this.props.img} className='img-tumbnail rounded'/>
-       </div>
-       <div className='col-md-9 col-sm-8'>
-       <h4 className="res-name text-danger font-weight-bold"> {this.props.name} </h4>
-       <p className='text-secondary'> {this.props.area}</p>
-       <div className='rating font-weight-bold' style={ratingStyle}>{this.props.rating.aggregate_rating} </div>
-       <p className='text-secondary'> {this.props.cuisines}</p>
-       <p> Cost {this.props.cost} for one</p>
-       </div>
-       </div>
+          <p className="text-secondary"> {props.cuisines}</p>
+          <p style={{ float: "left" }}>
+            {" "}
+            Cost &#8377;{props.cost} for one &nbsp; &nbsp;
+          </p>
+          <button className="order-btn">
+            <a
+              className="res-link"
+              href={props.url}
+              rel="noopener noreferrer"
+              target="_blank"
+            >
+              Order Online{" "}
+              <i style={{ fontSize: "20px" }} className="fa">
+                &nbsp; &#xf105;
+              </i>
+            </a>
+          </button>
+        </div>
       </div>
-    )
-  }
+    </div>
+  );
 }
 
-export default Restaurant
+export default Restaurant;

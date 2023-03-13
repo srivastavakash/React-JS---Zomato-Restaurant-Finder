@@ -1,32 +1,157 @@
-h1, p {
-  font-family: Lato;
-}
-.img-thumbnail{
- width:70%;
- height: 70%;
+body {
+  background-color: rgb(235, 233, 233);
+  box-sizing: border-box;
 }
 
-header{
-  background-color: #e60000;
-  height:7em;
+.img-thumbnail {
+  width: 70%;
+  height: 70%;
+  margin: 10px;
 }
-.head{
-  color:antiquewhite;
+
+.SearchBox {
+  background-color: #000;
+  border: 2px solid #ffc738;
+  width: auto;
+}
+
+header {
+  background-color: #ffc738;
+  height: 6em;
+  top: 0;
+}
+
+.head {
+  color: #e60000;
   display: inline;
 }
-.hh{
-  color: #e60000
+.hh {
+  color: #e60000;
 }
-.logo{
-  height:6em;
-  width:6em;  
+.logo {
+  height: 6em;
+  width: 6em;
 }
-.rating{
- float: right
+
+.res-list {
+  margin-top: 9em;
 }
-.name{
-  float: left
+
+.rating {
+  float: left;
+  margin-right: 15px;
+  border-radius: 6px;
 }
-.restaurant-card{
+.name {
+  float: left;
+}
+.restaurant-card {
   margin-bottom: 5px;
+  width: auto;
+}
+
+.restaurant-card:hover {
+  box-shadow: 0 0 6px rgba(90, 89, 89, 0.6);
+  -moz-box-shadow: 0 0 6px rgba(0, 0, 0, 0.6);
+  -webkit-box-shadow: 0 0 6px rgba(0, 0, 0, 0.6);
+  -o-box-shadow: 0 0 6px rgba(0, 0, 0, 0.6);
+}
+
+input[type="text"] {
+  top: 0;
+  height: 70%;
+  border-right: 2px solid black;
+}
+
+.btn {
+  top: 0;
+  height: 75%;
+  margin-left: 0.07em;
+  border-bottom-right-radius: 0.2em;
+}
+
+h5 {
+  color: red;
+}
+
+.tag {
+  font-family: cursive;
+  color: #fff;
+  background-color: green;
+  border-radius: 15px;
+  width: 180px;
+}
+
+.tag-line {
+  font-family: cursive;
+  font-weight: bold;
+  margin-left: -0.3em;
+}
+
+form {
+  margin-bottom: 0.5em;
+  margin-top: -1.8em;
+  margin-left: -5em;
+}
+
+.res-name {
+  color: rgb(255, 255, 255);
+  background-color: green;
+  width: 350px;
+  border-radius: 15px;
+  font-family: cursive;
+  margin-top: 8px;
+}
+
+.order-btn {
+  background-color: #ccdbbd;
+  color: green;
+  border: none;
+}
+
+.order-btn:hover {
+  background-color: #099e44;
+}
+
+.res-link {
+  color: #099e44;
+  text-decoration: none;
+}
+.res-link:hover {
+  color: #fff;
+}
+
+.form-inline {
+  display: flex;
+  flex-flow: row wrap;
+  align-items: center;
+}
+
+.form-inline input {
+  vertical-align: middle;
+  margin: 5px 10px 5px 0;
+  padding: 10px;
+  background-color: #fff;
+  border: 1px solid #ddd;
+}
+
+.form-inline button {
+  padding: 10px 20px;
+  border: 1px solid #ddd;
+  color: white;
+  cursor: pointer;
+  height: 2.5em;
+  margin-top: 0.46em;
+  vertical-align: middle;
+}
+
+@media (max-width: 500px) {
+  .form-inline input {
+    margin: 10px 0;
+  }
+
+  .form-inline {
+    flex-direction: column;
+    align-items: stretch;
+  }
 }

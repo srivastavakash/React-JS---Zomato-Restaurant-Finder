@@ -1,0 +1,176 @@
+import React, { Component } from "react";
+import SearchBox from "./components/SearchBox";
+import Restaurant from "./components/Restaurant";
+import Header from "./components/Header";
+
+const apiKey = "33419799ae4c439ddd65b4c6bfbca9cb";
+
+class App extends Component {
+  constructor() {
+    super();
+    this.state = {
+      header: {
+        method: "GET",
+        headers: {
+          "user-key": apiKey,
+          "Content-Type": "application/json"
+        },
+        credentials: "same-origin"
+      },
+      city: "",
+      cityId: "",
+      entity_type: "",
+      restaurants: [],
+      cuisine: "",
+      operation: "Get Restaurants ",
+      isLoaded: false
+    };
+    this.cityId = "";
+    this.entity_type = "";
+  }
+
+  onChangeHandler = event => {
+    const { name, value } = event.target;
+    this.setState({
+      [name]: value
+    });
+  };
+
+  getResturants = async e => {
+    e.preventDefault();
+    this.setState({ operation: "Searching..." });
+    console.log(
+      "getting  restaurants...",
+      "1. city = ",
+      this.state.city,
+      " cuisine = ",
+      this.state.cuisine
+    );
+    const axios = require("axios");
+
+    await axios({
+      method: "GET",
+      url:
+        "https://developers.zomato.com/api/v2.1/locations?query=" +
+        this.state.city,
+      headers: {
+        "user-key": apiKey,
+        "content-type": "application/json"
+      }
+    })
+      .then(res => {
+        console.log("2. city details : ", res);
+        this.setState({
+          cityId: res.data.location_suggestions[0].entity_id,
+          entity_type: res.data.location_suggestions[0].entity_type
+        });
+      })
+      .catch(error => {
+        console.log("error 1 : ", error);
+      });
+
+    console.log(
+      "3. got entity-> entity type : ",
+      this.state.entity_type,
+      "entity id : ",
+      this.state.cityId
+    );
+
+    //https://developers.zomato.com/api/v2.1/search?entity_id=5&entity_type=city&radius=5000&cuisines=55&sort=rating&order=desc
+
+    await axios({
+      method: "GET",
+      url:
+        "https://developers.zomato.com/api/v2.1/search?entity_id=" +
+        this.state.cityId +
+        "&entity_type=" +
+        this.state.entity_type +
+        "&start=0&count=15&radius=5000&cuisines=" +
+        this.state.cuisine +
+        "&sort=real_distance&order=asc",
+      headers: {
+        "user-key": apiKey,
+        "content-type": "application/json"
+      }
+    })
+      .then(response => {
+        this.setState({
+          restaurants: response.data.restaurants
+        });
+      })
+      .catch(error => {
+        console.log("error 2 :", error.response);
+      });
+
+    this.setState({
+      city: "",
+      cuisine: "",
+      operation: "Get Restaurants"
+    });
+  };
+
+  render() {
+    var list = [...this.state.restaurants];
+
+    const restaurantList = list.map(restaurant => (
+      <Restaurant
+        key={restaurant.restaurant.id}
+        name={restaurant.restaurant.name}
+        cuisines={restaurant.restaurant.cuisines}
+        cost={restaurant.restaurant.average_cost_for_two / 2}
+        img={restaurant.restaurant.thumb}
+        rating={restaurant.restaurant.user_rating}
+        votes={restaurant.restaurant.user_rating.votes}
+        ratings={restaurant.restaurant.all_reviews_count}
+        locality={restaurant.restaurant.location.locality_verbose}
+      />
+    ));
+
+    return (
+      <React.Fragment>
+        <Header
+          operation={this.state.operation}
+          onSubmit={this.getResturants}
+          onChangeHandler={this.onChangeHandler}
+          data={this.state}
+        />
+
+        <SearchBox
+          operation={this.state.operation}
+          onSubmit={this.getResturants}
+          onChangeHandler={this.onChangeHandler}
+          data={this.state}
+        />
+
+        {console.log(
+          " 4. city id : ",
+          this.cityId,
+          "entity type :",
+          this.entity_type
+        )}
+        <div className="container">
+          {restaurantList}
+
+          {console.log(this.state.restaurants)}
+        </div>
+      </React.Fragment>
+    );
+  }
+}
+
+export default App;
+
+
+ <div className="container res-list">
+
+   {this.state.isLoaded && (
+      <p className="text-danger">
+         Showing top 15 results for{" "}
+       <b>
+        {this.cuisine_obj[0].cuisine.cuisine_name + " in " + this.city}
+       </b>
+      </p>
+          )}
+   {restaurantList}
+
+</div>
